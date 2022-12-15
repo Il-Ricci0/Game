@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.*;
 
 public class App {
@@ -8,14 +9,37 @@ public class App {
         Integer playerPositionX = 0;
         Integer playerPositionY = 0;
         Integer[][] world = generateEmptyWorld(worldDimensionX, worldDimensionY);
+        clrscr();
         System.out.println(printWorld(world));
-        String action = scanner.nextLine();
-        switch(action){
-            case "w":
-                playerPositionX = findPlayer(world, worldDimensionX, worldDimensionY)[0];
-                playerPositionY = findPlayer(world, worldDimensionX, worldDimensionY)[1];
+        while(true){
+            String action = scanner.nextLine();
+            switch(action){
+                case "w":
+                    playerPositionX = findPlayer(world, worldDimensionX, worldDimensionY)[0];
+                    playerPositionY = findPlayer(world, worldDimensionX, worldDimensionY)[1];
+                    if(playerPositionY - 1 >= 0){
+                        world[playerPositionX][playerPositionY] = 0;
+                        playerPositionY--;
+                        world[playerPositionX][playerPositionY] = 1;
+                        clrscr();
+                        System.out.println(printWorld(world));
+                    }
+                    break;
                 
+                case "s":
+                    playerPositionX = findPlayer(world, worldDimensionX, worldDimensionY)[0];
+                    playerPositionY = findPlayer(world, worldDimensionX, worldDimensionY)[1];
+                    if(playerPositionY + 1 < worldDimensionY){
+                        world[playerPositionX][playerPositionY] = 0;
+                        playerPositionY++;
+                        world[playerPositionX][playerPositionY] = 1;
+                        clrscr();
+                        System.out.println(printWorld(world));
+                    }
+                    break;
+            }
         }
+        //scanner.close();
     }
 
     static Integer[][] generateEmptyWorld(Integer worldDimensionX, Integer worldDimensionY){
@@ -51,5 +75,14 @@ public class App {
         }
 
         return playerPosition;
+    }
+
+    public static void clrscr(){
+        try {
+            if (System.getProperty("os.name").contains("Windows"))
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            else
+                Runtime.getRuntime().exec("clear");
+        } catch (IOException | InterruptedException ex) {}
     }
 }
