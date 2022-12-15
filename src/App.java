@@ -26,7 +26,7 @@ public class App {
                     }
                     break;
                 
-                case "d":
+                case "s":
                     playerColumnIndex = findPlayer(world, worldDimensionX, worldDimensionY)[0];
                     playerRowIndex = findPlayer(world, worldDimensionX, worldDimensionY)[1];
                     if(playerColumnIndex + 1 < worldDimensionY){
@@ -39,9 +39,6 @@ public class App {
                     break;
             }
         }
-        //scanner.close();
-        //riccio ha aggiunto qualcosa
-        //paolo
     }
 
     static Integer[][] generateEmptyWorld(Integer worldDimensionX, Integer worldDimensionY){
@@ -59,9 +56,9 @@ public class App {
     }
 
     static String printWorld(Integer[][] world){
-    return (Arrays.deepToString(world)
-                         .replace("],","\n").replace(",","\t ")
-                         .replaceAll("[\\[\\]]", " "));
+        return (Arrays.deepToString(world)
+                                .replace("],","\n").replace(",","\t ")
+                                .replaceAll("[\\[\\]]", " "));
     }
 
     static Integer[] findPlayer(Integer[][] world, Integer worldDimensionX, Integer worldDimensionY){
