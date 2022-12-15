@@ -14,9 +14,9 @@ public class App {
         while(true){
             String action = scanner.nextLine();
             switch(action){
-                case "w":
-                    playerPositionX = findPlayer(world, worldDimensionX, worldDimensionY)[0];
-                    playerPositionY = findPlayer(world, worldDimensionX, worldDimensionY)[1];
+                case "a":
+                    playerPositionY = findPlayer(world, worldDimensionX, worldDimensionY)[0];
+                    playerPositionX = findPlayer(world, worldDimensionX, worldDimensionY)[1];
                     if(playerPositionY - 1 >= 0){
                         world[playerPositionX][playerPositionY] = 0;
                         playerPositionY--;
@@ -26,9 +26,9 @@ public class App {
                     }
                     break;
                 
-                case "s":
-                    playerPositionX = findPlayer(world, worldDimensionX, worldDimensionY)[0];
-                    playerPositionY = findPlayer(world, worldDimensionX, worldDimensionY)[1];
+                case "d":
+                    playerPositionY = findPlayer(world, worldDimensionX, worldDimensionY)[0];
+                    playerPositionX = findPlayer(world, worldDimensionX, worldDimensionY)[1];
                     if(playerPositionY + 1 < worldDimensionY){
                         world[playerPositionX][playerPositionY] = 0;
                         playerPositionY++;
@@ -65,11 +65,11 @@ public class App {
     static Integer[] findPlayer(Integer[][] world, Integer worldDimensionX, Integer worldDimensionY){
         Integer[] playerPosition = new Integer[2];
 
-        for(int i = 0; i < worldDimensionX; i++){
-            for(int j = 0; j < worldDimensionY; j++){
-                if(world[i][j] == 1){
-                    playerPosition[0] = i;
-                    playerPosition[1] = j;
+        for(int columnIndex = 0; columnIndex < worldDimensionX; columnIndex++){
+            for(int rowIndex = 0; rowIndex < worldDimensionY; rowIndex++){
+                if(world[columnIndex][rowIndex] == 1){
+                    playerPosition[0] = columnIndex;
+                    playerPosition[1] = rowIndex;
                 }
             }   
         }
