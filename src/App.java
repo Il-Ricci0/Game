@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.*;
 
+//francesi polacchiu
+
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
@@ -28,7 +30,7 @@ public class App {
                         System.out.println(printWorld(world));
                     }
                     break;
-                
+
                 case "s":
                     playerColumnIndex = findPlayer(world, worldDimensionX, worldDimensionY)[0];
                     playerRowIndex = findPlayer(world, worldDimensionX, worldDimensionY)[1];
@@ -52,7 +54,7 @@ public class App {
                         System.out.println(printWorld(world));
                     }
                     break;
-                
+
                 case "d":
                     playerColumnIndex = findPlayer(world, worldDimensionX, worldDimensionY)[0];
                     playerRowIndex = findPlayer(world, worldDimensionX, worldDimensionY)[1];
@@ -64,7 +66,7 @@ public class App {
                         System.out.println(printWorld(world));
                     }
                     break;
-                
+
                 default:
                     end = true;
                     clearConsole();
@@ -81,7 +83,7 @@ public class App {
         for(int i = 0; i < worldDimensionX; i++){
             for(int j = 0; j < worldDimensionY; j++){
                 world[i][j] = 0;
-            }   
+            }
         }
 
         world[0][0] = 1;
@@ -104,7 +106,7 @@ public class App {
                     playerPosition[0] = columnIndex;
                     playerPosition[1] = rowIndex;
                 }
-            }   
+            }
         }
 
         return playerPosition;
