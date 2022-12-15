@@ -6,40 +6,40 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         Integer worldDimensionX = 10;
 	    Integer worldDimensionY = 10;
-        Integer playerPositionX = 0;
-        Integer playerPositionY = 0;
+        Integer playerColumnIndex = 0;
+        Integer playerRowIndex = 0;
         Integer[][] world = generateEmptyWorld(worldDimensionX, worldDimensionY);
         clrscr();
         System.out.println(printWorld(world));
         while(true){
             String action = scanner.nextLine();
             switch(action){
-                case "a":
-                    playerPositionY = findPlayer(world, worldDimensionX, worldDimensionY)[0];
-                    playerPositionX = findPlayer(world, worldDimensionX, worldDimensionY)[1];
-                    if(playerPositionY - 1 >= 0){
-                        world[playerPositionX][playerPositionY] = 0;
-                        playerPositionY--;
-                        world[playerPositionX][playerPositionY] = 1;
+                case "w":
+                    playerColumnIndex = findPlayer(world, worldDimensionX, worldDimensionY)[0];
+                    playerRowIndex = findPlayer(world, worldDimensionX, worldDimensionY)[1];
+                    if(playerColumnIndex - 1 >= 0){
+                        world[playerColumnIndex][playerRowIndex] = 0;
+                        playerColumnIndex--;
+                        world[playerColumnIndex][playerRowIndex] = 1;
                         clrscr();
                         System.out.println(printWorld(world));
                     }
                     break;
                 
                 case "d":
-                    playerPositionY = findPlayer(world, worldDimensionX, worldDimensionY)[0];
-                    playerPositionX = findPlayer(world, worldDimensionX, worldDimensionY)[1];
-                    if(playerPositionY + 1 < worldDimensionY){
-                        world[playerPositionX][playerPositionY] = 0;
-                        playerPositionY++;
-                        world[playerPositionX][playerPositionY] = 1;
+                    playerColumnIndex = findPlayer(world, worldDimensionX, worldDimensionY)[0];
+                    playerRowIndex = findPlayer(world, worldDimensionX, worldDimensionY)[1];
+                    if(playerColumnIndex + 1 < worldDimensionY){
+                        world[playerColumnIndex][playerRowIndex] = 0;
+                        playerColumnIndex--;
+                        world[playerColumnIndex][playerRowIndex] = 1;
                         clrscr();
                         System.out.println(printWorld(world));
                     }
                     break;
             }
         }
-        //scanner.close();paolo
+        //scanner.close();
     }
 
     static Integer[][] generateEmptyWorld(Integer worldDimensionX, Integer worldDimensionY){
