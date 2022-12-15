@@ -1,8 +1,6 @@
 import java.io.*;
 import java.util.*;
 
-//francesi polacchiu
-
 public class App {
     static Integer worldDimensionX = 10;
     static Integer worldDimensionY = 10;
