@@ -1,8 +1,6 @@
 import java.io.*;
 import java.util.*;
 
-//francesi polacchiu
-
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
@@ -22,7 +20,7 @@ public class App {
                 case "w":
                     playerColumnIndex = findPlayer(world, worldDimensionX, worldDimensionY)[0];
                     playerRowIndex = findPlayer(world, worldDimensionX, worldDimensionY)[1];
-                    if(playerColumnIndex - 1 >= 0){
+                    if(playerColumnIndex - 1 >= 0 /*&& playerColumnIndex - 1 <= worldDimensionY*/){
                         world[playerColumnIndex][playerRowIndex] = 0;
                         playerColumnIndex--;
                         world[playerColumnIndex][playerRowIndex] = 1;
