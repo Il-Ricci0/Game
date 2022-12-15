@@ -39,7 +39,7 @@ public class App {
                     break;
             }
         }
-        //scanner.close();
+        //scanner.close();paolo
     }
 
     static Integer[][] generateEmptyWorld(Integer worldDimensionX, Integer worldDimensionY){
