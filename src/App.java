@@ -1,56 +1,23 @@
 import java.io.*;
 import java.util.*;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 public class App {
     static Integer worldDimensionX = 10;
     static Integer worldDimensionY = 10;
     static Boolean end = false;
     static Integer[][] world = generateEmptyWorld(worldDimensionX, worldDimensionY);
+    static Player player = new Player("Giocatore 1", 0, 0);
+    // martrix[row][column]
 
     public static void main(String[] args) throws Exception {
-        gameLoop();
+        Thread gameLoop = new Thread(new GameLoop());
+        gameLoop.run();
     }
 
-    static void gameLoop() {
-        Player player = new Player("Giocatore 1", 0, 0);
-        while (!end) {
-            getInput(player);
-            refreshScreen();
-        }
-    }
-
-    static void refreshScreen() {
-        clearConsole();
-        System.out.println(printWorld(world));
-    }
-
-    static void getInput(Player player) {
-        Scanner scanner = new Scanner(System.in);
-        String action = scanner.nextLine();
-        switch (action) {
-            case "w":
-            
-                break;
-            
-            case "a":
-
-            break;
-
-            case "s":
-
-                break;
-
-            case "d":
-
-                break;
-
-            // default:
-            //     end = true;
-            //     clearConsole();
-            //     System.out.println("FINE DEL GIOCO!");
-            //     break;
-        }
-    }
+    
 
     static Integer[][] generateEmptyWorld(Integer worldDimensionX, Integer worldDimensionY) {
         Integer[][] world = new Integer[worldDimensionX][worldDimensionY];
@@ -64,10 +31,14 @@ public class App {
         return world;
     }
 
-    static String printWorld(Integer[][] world) {
-        return (Arrays.deepToString(world)
-                .replace("],", "\n").replace(",", "\t ")
-                .replaceAll("[\\[\\]]", " "));
+    static void printWorld(Integer[][] world) {
+        for (int i = 0; i < worldDimensionX; i++) {
+            String row = new String();
+            for (int j = 0; j < worldDimensionY; j++) {
+                row += world[i][j] + " ";
+            }
+            System.out.println(row);
+        }
     }
 
     static Integer[] findPlayer(Integer[][] world, Integer worldDimensionX, Integer worldDimensionY) {
@@ -92,6 +63,61 @@ public class App {
             else
                 Runtime.getRuntime().exec("clear");
         } catch (IOException | InterruptedException ex) {
+        }
+    }
+
+    static class GameLoop implements Runnable{
+        private void gameLoop() {
+            while (!end) {
+                refreshScreen();
+            }
+        }
+    
+        private void refreshScreen() {
+            clearConsole();
+            printWorld(world);
+        }
+
+        public void run(){
+            gameLoop();
+        } 
+    }
+
+    public class keyEvent implements KeyListener {
+        public void keyPressed(KeyEvent k) {
+            switch (k.getKeyChar()) {
+                case 'w':
+                    world[player.getRow()][player.getColumn()] = 0;
+                    player.setRow(player.getRow() - 1);
+                    world[player.getRow()][player.getColumn()] = 1;
+                    break;
+
+                case 'a':
+                    world[player.getRow()][player.getColumn()] = 0;
+                    player.setColumn(player.getColumn() - 1);
+                    world[player.getRow()][player.getColumn()] = 1;
+                    break;
+
+                case 's':
+                    world[player.getRow()][player.getColumn()] = 0;
+                    player.setRow(player.getRow() + 1);
+                    world[player.getRow()][player.getColumn()] = 1;
+                    break;
+
+                case 'd':
+                    world[player.getRow()][player.getColumn()] = 0;
+                    player.setColumn(player.getColumn() + 1);
+                    world[player.getRow()][player.getColumn()] = 1;
+                    break;
+            }
+        }
+
+        public void keyReleased(KeyEvent k) {
+
+        }
+
+        public void keyTyped(KeyEvent k) {
+
         }
     }
 }

@@ -9,20 +9,20 @@ public class Player {
         this.row = spawnrow;
     }
 
-    public void setcolumn(Integer column) {
+    public void setColumn(Integer column) {
         this.column = column;
     }
 
-    public void setrow(Integer row) {
+    public void setRow(Integer row) {
         this.row = row;
     }
 
-    public Integer getcolumn() {
+    public Integer getColumn() {
         return column;
     }
 
-    public Integer getrow() {
-        return column;
+    public Integer getRow() {
+        return row;
     }
 
     public String getName() {
