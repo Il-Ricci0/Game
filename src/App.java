@@ -31,7 +31,7 @@ public class App {
                     playerRowIndex = findPlayer(world, worldDimensionX, worldDimensionY)[1];
                     if(playerColumnIndex + 1 < worldDimensionY){
                         world[playerColumnIndex][playerRowIndex] = 0;
-                        playerColumnIndex--;
+                        playerColumnIndex++;
                         world[playerColumnIndex][playerRowIndex] = 1;
                         clrscr();
                         System.out.println(printWorld(world));
@@ -41,6 +41,7 @@ public class App {
         }
         //scanner.close();
         //riccio ha aggiunto qualcosa
+        //paolo
     }
 
     static Integer[][] generateEmptyWorld(Integer worldDimensionX, Integer worldDimensionY){
