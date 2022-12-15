@@ -9,9 +9,12 @@ public class App {
         Integer playerColumnIndex = 0;
         Integer playerRowIndex = 0;
         Integer[][] world = generateEmptyWorld(worldDimensionX, worldDimensionY);
-        clrscr();
+        Boolean end = false;
+
+        clearConsole();
         System.out.println(printWorld(world));
-        while(true){
+
+        while(!end){
             String action = scanner.nextLine();
             switch(action){
                 case "w":
@@ -21,7 +24,7 @@ public class App {
                         world[playerColumnIndex][playerRowIndex] = 0;
                         playerColumnIndex--;
                         world[playerColumnIndex][playerRowIndex] = 1;
-                        clrscr();
+                        clearConsole();
                         System.out.println(printWorld(world));
                     }
                     break;
@@ -33,7 +36,7 @@ public class App {
                         world[playerColumnIndex][playerRowIndex] = 0;
                         playerColumnIndex++;
                         world[playerColumnIndex][playerRowIndex] = 1;
-                        clrscr();
+                        clearConsole();
                         System.out.println(printWorld(world));
                     }
                     break;
@@ -45,7 +48,7 @@ public class App {
                         world[playerColumnIndex][playerRowIndex] = 0;
                         playerRowIndex--;
                         world[playerColumnIndex][playerRowIndex] = 1;
-                        clrscr();
+                        clearConsole();
                         System.out.println(printWorld(world));
                     }
                     break;
@@ -57,12 +60,19 @@ public class App {
                         world[playerColumnIndex][playerRowIndex] = 0;
                         playerRowIndex++;
                         world[playerColumnIndex][playerRowIndex] = 1;
-                        clrscr();
+                        clearConsole();
                         System.out.println(printWorld(world));
                     }
                     break;
+                
+                default:
+                    end = true;
+                    clearConsole();
+                    System.out.println("FINE DEL GIOCO!");
+                    break;
             }
         }
+        scanner.close();
     }
 
     static Integer[][] generateEmptyWorld(Integer worldDimensionX, Integer worldDimensionY){
@@ -100,7 +110,7 @@ public class App {
         return playerPosition;
     }
 
-    public static void clrscr(){
+    public static void clearConsole(){
         try {
             if (System.getProperty("os.name").contains("Windows"))
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
