@@ -37,6 +37,30 @@ public class App {
                         System.out.println(printWorld(world));
                     }
                     break;
+
+                case "a":
+                    playerColumnIndex = findPlayer(world, worldDimensionX, worldDimensionY)[0];
+                    playerRowIndex = findPlayer(world, worldDimensionX, worldDimensionY)[1];
+                    if(playerRowIndex - 1 >= 0){
+                        world[playerColumnIndex][playerRowIndex] = 0;
+                        playerRowIndex--;
+                        world[playerColumnIndex][playerRowIndex] = 1;
+                        clrscr();
+                        System.out.println(printWorld(world));
+                    }
+                    break;
+                
+                case "d":
+                    playerColumnIndex = findPlayer(world, worldDimensionX, worldDimensionY)[0];
+                    playerRowIndex = findPlayer(world, worldDimensionX, worldDimensionY)[1];
+                    if(playerRowIndex + 1 < worldDimensionX){
+                        world[playerColumnIndex][playerRowIndex] = 0;
+                        playerRowIndex++;
+                        world[playerColumnIndex][playerRowIndex] = 1;
+                        clrscr();
+                        System.out.println(printWorld(world));
+                    }
+                    break;
             }
         }
     }
