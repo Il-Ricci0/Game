@@ -15,12 +15,12 @@ public class Game {
     public static Player player = new Player("Giocatore 1", 0, 0);
     static JPanel panel = createPanel();
     public static final String VOID = "___";
-    public static final String PLAYER = "UwU";
+    public static final String PLAYER = "| O |";
     // martrix[row][column]
 
     public static void main(String[] args) throws Exception {
         JPanel panel = new JPanel();
-        
+
         // Add a key listener to the panel
         panel.addKeyListener(new KeyAdapter() {
             @Override
@@ -78,7 +78,7 @@ public class Game {
 
          while (true) {
             label.setText(printWorld(world));
- 
+
              // Update the panel to show the new label color
              panel.revalidate();
              panel.repaint();
