@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.Date;
 
 enum Cell {
     VOID,
@@ -12,10 +13,16 @@ public class Game {
     public static Integer worldDimensionY = 30;
     public static Boolean end = false;
     public static Cell[][] world = generateEmptyWorld(worldDimensionX, worldDimensionY);
+    // martrix[row][column]
+
     public static Player player = new Player("Giocatore 1", 0, 0);
     public static final String VOID = "___";
     public static final String PLAYER = "| O |";
-    // martrix[row][column]
+
+    public static final Integer WINDOWWIDTH = 750;
+    public static final Integer WINDOWHEIGTH = 700;
+
+    public static final Long DELAY = 1000L;
 
     public static void main(String[] args) throws Exception {
         JPanel panel = new JPanel();
@@ -70,18 +77,13 @@ public class Game {
         // Add the panel to a frame and display it
         JFrame frame = new JFrame();
         frame.add(panel);
-        frame.setSize(750, 700); // Set the size of the frame
+        frame.setSize(WINDOWWIDTH, WINDOWHEIGTH); // Set the size of the frame
         frame.setVisible(true); // Make the frame visible
 
         world[player.getRow()][player.getColumn()] = Cell.PLAYER;
 
-        while (true) {
-            label.setText(printWorld(world));
-
-            // Update the panel to show the new label color
-            panel.revalidate();
-            panel.repaint();
-        }
+        Thread worldRenderer = new Thread(new WorldRenderer(label, panel));
+        worldRenderer.start();
     }
 
     static Cell[][] generateEmptyWorld(Integer worldDimensionX, Integer worldDimensionY) {
@@ -92,19 +94,6 @@ public class Game {
                 world[i][j] = Cell.VOID;
             }
         }
-
         return world;
-    }
-
-    static public String printWorld(Cell[][] world) {
-        String output = "<html>";
-        for (int i = 0; i < worldDimensionX; i++) {
-            for (int j = 0; j < worldDimensionY; j++) {
-                output += world[i][j] + " ";
-            }
-            output += "<br>";
-        }
-        output += "</html>";
-        return output.replaceAll("VOID", VOID).replaceAll("PLAYER", PLAYER);
     }
 }
