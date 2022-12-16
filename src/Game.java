@@ -19,27 +19,34 @@ public class Game {
             public void keyPressed(KeyEvent e) {
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_W:
-                        world[player.getRow()][player.getColumn()] = 0;
-                        player.setRow(player.getRow() - 1);
-                        world[player.getRow()][player.getColumn()] = 1;
+                        if(player.getRow() - 1 >= 0){
+                            world[player.getRow()][player.getColumn()] = 0;
+                            player.setRow(player.getRow() - 1);
+                            world[player.getRow()][player.getColumn()] = 1;
+                        }
                         break;
-
                     case KeyEvent.VK_A:
-                        world[player.getRow()][player.getColumn()] = 0;
-                        player.setColumn(player.getColumn() - 1);
-                        world[player.getRow()][player.getColumn()] = 1;
+                        if(player.getColumn() - 1 >= 0){
+                            world[player.getRow()][player.getColumn()] = 0;
+                            player.setColumn(player.getColumn() - 1);
+                            world[player.getRow()][player.getColumn()] = 1;
+                        }
                         break;
 
                     case KeyEvent.VK_S:
-                        world[player.getRow()][player.getColumn()] = 0;
-                        player.setRow(player.getRow() + 1);
-                        world[player.getRow()][player.getColumn()] = 1;
+                        if(player.getRow() + 1 < worldDimensionY){
+                            world[player.getRow()][player.getColumn()] = 0;
+                            player.setRow(player.getRow() + 1);
+                            world[player.getRow()][player.getColumn()] = 1;
+                        }
                         break;
 
                     case KeyEvent.VK_D:
-                        world[player.getRow()][player.getColumn()] = 0;
-                        player.setColumn(player.getColumn() + 1);
-                        world[player.getRow()][player.getColumn()] = 1;
+                        if(player.getColumn() + 1 < worldDimensionX){
+                            world[player.getRow()][player.getColumn()] = 0;
+                            player.setColumn(player.getColumn() + 1);
+                            world[player.getRow()][player.getColumn()] = 1;
+                        }
                         break;
                 }
             }
@@ -63,48 +70,6 @@ public class Game {
              panel.revalidate();
              panel.repaint();
          }
-    }
-
-    public class Listener implements KeyListener {
-        public void keyPressed(KeyEvent k) {
-            switch (k.getKeyChar()) {
-                case 'w':
-                    JLabel l = new JLabel();
-                    l.setText("TESTO");
-                    l.setForeground(Color.green);
-                    panel.add(l);
-                    world[player.getRow()][player.getColumn()] = 0;
-                    player.setRow(player.getRow() - 1);
-                    world[player.getRow()][player.getColumn()] = 1;
-                    break;
-
-                case 'a':
-                    world[player.getRow()][player.getColumn()] = 0;
-                    player.setColumn(player.getColumn() - 1);
-                    world[player.getRow()][player.getColumn()] = 1;
-                    break;
-
-                case 's':
-                    world[player.getRow()][player.getColumn()] = 0;
-                    player.setRow(player.getRow() + 1);
-                    world[player.getRow()][player.getColumn()] = 1;
-                    break;
-
-                case 'd':
-                    world[player.getRow()][player.getColumn()] = 0;
-                    player.setColumn(player.getColumn() + 1);
-                    world[player.getRow()][player.getColumn()] = 1;
-                    break;
-            }
-        }
-
-        public void keyReleased(KeyEvent k) {
-
-        }
-
-        public void keyTyped(KeyEvent k) {
-
-        }
     }
 
     static Integer[][] generateEmptyWorld(Integer worldDimensionX, Integer worldDimensionY) {
@@ -178,5 +143,4 @@ public class Game {
             gameLoop();
         }
     }
-
 }
