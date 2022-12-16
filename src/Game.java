@@ -1,10 +1,9 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 public class Game {
-    public static Integer worldDimensionX = 10;
-    public static Integer worldDimensionY = 10;
+    public static Integer worldDimensionX = 50;
+    public static Integer worldDimensionY = 40;
     public static Boolean end = false;
     public static Integer[][] world = generateEmptyWorld(worldDimensionX, worldDimensionY);
     public static Player player = new Player("Giocatore 1", 0, 0);
@@ -25,6 +24,7 @@ public class Game {
                             world[player.getRow()][player.getColumn()] = 1;
                         }
                         break;
+
                     case KeyEvent.VK_A:
                         if(player.getColumn() - 1 >= 0){
                             world[player.getRow()][player.getColumn()] = 0;
@@ -34,7 +34,7 @@ public class Game {
                         break;
 
                     case KeyEvent.VK_S:
-                        if(player.getRow() + 1 < worldDimensionY){
+                        if(player.getRow() + 1 < worldDimensionX){
                             world[player.getRow()][player.getColumn()] = 0;
                             player.setRow(player.getRow() + 1);
                             world[player.getRow()][player.getColumn()] = 1;
@@ -42,7 +42,7 @@ public class Game {
                         break;
 
                     case KeyEvent.VK_D:
-                        if(player.getColumn() + 1 < worldDimensionX){
+                        if(player.getColumn() + 1 < worldDimensionY){
                             world[player.getRow()][player.getColumn()] = 0;
                             player.setColumn(player.getColumn() + 1);
                             world[player.getRow()][player.getColumn()] = 1;
@@ -57,11 +57,13 @@ public class Game {
         panel.requestFocusInWindow();
         panel.add(label);
 
-    // Add the panel to a frame and display it
-    JFrame frame = new JFrame();
-    frame.add(panel);
-    frame.setSize(400, 300);  // Set the size of the frame
-    frame.setVisible(true);  // Make the frame visible
+        // Add the panel to a frame and display it
+        JFrame frame = new JFrame();
+        frame.add(panel);
+        frame.setSize(800, 800);  // Set the size of the frame
+        frame.setVisible(true);  // Make the frame visible
+
+        world[player.getRow()][player.getColumn()] = 1;
 
          while (true) {
             label.setText(printWorld(world));
@@ -92,9 +94,8 @@ public class Game {
             }
             output += "<br>";
         }
-        output+= "</html>";
-        System.out.println(output.replaceAll("<br>", "\n").replaceAll("<html>", "").replaceAll("</html>", ""));
-        return output;
+        output += "</html>";
+        return output.replaceAll("0", ".").replaceAll("1", "@");
     }
 
     public Integer[] findPlayer(Integer[][] world, Integer worldDimensionX, Integer worldDimensionY) {
