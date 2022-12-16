@@ -1,17 +1,24 @@
 import javax.swing.*;
 import java.awt.event.*;
 
+enum Cell {
+    VOID,
+    PLAYER,
+    WALL
+  }
+
 public class Game {
     public static Integer worldDimensionX = 50;
     public static Integer worldDimensionY = 40;
     public static Boolean end = false;
-    public static Integer[][] world = generateEmptyWorld(worldDimensionX, worldDimensionY);
+    public static Cell[][] world = generateEmptyWorld(worldDimensionX, worldDimensionY);
     public static Player player = new Player("Giocatore 1", 0, 0);
     static JPanel panel = createPanel();
     // martrix[row][column]
 
     public static void main(String[] args) throws Exception {
         JPanel panel = new JPanel();
+        
         // Add a key listener to the panel
         panel.addKeyListener(new KeyAdapter() {
             @Override
@@ -19,39 +26,41 @@ public class Game {
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_W:
                         if(player.getRow() - 1 >= 0){
-                            world[player.getRow()][player.getColumn()] = 0;
+                            world[player.getRow()][player.getColumn()] = Cell.VOID;
                             player.setRow(player.getRow() - 1);
-                            world[player.getRow()][player.getColumn()] = 1;
+                            world[player.getRow()][player.getColumn()] = Cell.PLAYER;
                         }
                         break;
 
                     case KeyEvent.VK_A:
                         if(player.getColumn() - 1 >= 0){
-                            world[player.getRow()][player.getColumn()] = 0;
+                            world[player.getRow()][player.getColumn()] = Cell.VOID;
                             player.setColumn(player.getColumn() - 1);
-                            world[player.getRow()][player.getColumn()] = 1;
+                            world[player.getRow()][player.getColumn()] = Cell.PLAYER;
                         }
                         break;
 
                     case KeyEvent.VK_S:
                         if(player.getRow() + 1 < worldDimensionX){
-                            world[player.getRow()][player.getColumn()] = 0;
+                            world[player.getRow()][player.getColumn()] = Cell.VOID;
                             player.setRow(player.getRow() + 1);
-                            world[player.getRow()][player.getColumn()] = 1;
+                            world[player.getRow()][player.getColumn()] = Cell.PLAYER;
                         }
                         break;
 
                     case KeyEvent.VK_D:
                         if(player.getColumn() + 1 < worldDimensionY){
-                            world[player.getRow()][player.getColumn()] = 0;
+                            world[player.getRow()][player.getColumn()] = Cell.VOID;
                             player.setColumn(player.getColumn() + 1);
-                            world[player.getRow()][player.getColumn()] = 1;
+                            world[player.getRow()][player.getColumn()] = Cell.PLAYER;
                         }
                         break;
                 }
             }
         });
+
         JLabel label = new JLabel();
+
         // Make the panel focusable so it can receive key events
         panel.setFocusable(true);
         panel.requestFocusInWindow();
@@ -63,7 +72,7 @@ public class Game {
         frame.setSize(800, 800);  // Set the size of the frame
         frame.setVisible(true);  // Make the frame visible
 
-        world[player.getRow()][player.getColumn()] = 1;
+        world[player.getRow()][player.getColumn()] = Cell.PLAYER;
 
          while (true) {
             label.setText(printWorld(world));
@@ -74,19 +83,19 @@ public class Game {
          }
     }
 
-    static Integer[][] generateEmptyWorld(Integer worldDimensionX, Integer worldDimensionY) {
-        Integer[][] world = new Integer[worldDimensionX][worldDimensionY];
+    static Cell[][] generateEmptyWorld(Integer worldDimensionX, Integer worldDimensionY) {
+        Cell[][] world = new Cell[worldDimensionX][worldDimensionY];
 
         for (int i = 0; i < worldDimensionX; i++) {
             for (int j = 0; j < worldDimensionY; j++) {
-                world[i][j] = 0;
+                world[i][j] = Cell.VOID;
             }
         }
 
         return world;
     }
 
-    static public String printWorld(Integer[][] world) {
+    static public String printWorld(Cell[][] world) {
         String output = "<html>";
         for (int i = 0; i < worldDimensionX; i++) {
             for (int j = 0; j < worldDimensionY; j++) {
@@ -95,7 +104,7 @@ public class Game {
             output += "<br>";
         }
         output += "</html>";
-        return output.replaceAll("0", ".").replaceAll("1", "@");
+        return output.replaceAll("VOID", ".").replaceAll("PLAYER", "@");
     }
 
     public Integer[] findPlayer(Integer[][] world, Integer worldDimensionX, Integer worldDimensionY) {

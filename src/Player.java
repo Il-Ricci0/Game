@@ -17,6 +17,10 @@ public class Player {
         this.row = row;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Integer getColumn() {
         return column;
     }
