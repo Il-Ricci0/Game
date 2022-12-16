@@ -8,12 +8,14 @@ enum Cell {
   }
 
 public class Game {
-    public static Integer worldDimensionX = 50;
-    public static Integer worldDimensionY = 40;
+    public static Integer worldDimensionX = 40;
+    public static Integer worldDimensionY = 30;
     public static Boolean end = false;
     public static Cell[][] world = generateEmptyWorld(worldDimensionX, worldDimensionY);
     public static Player player = new Player("Giocatore 1", 0, 0);
     static JPanel panel = createPanel();
+    public static final String VOID = "___";
+    public static final String PLAYER = "UwU";
     // martrix[row][column]
 
     public static void main(String[] args) throws Exception {
@@ -69,7 +71,7 @@ public class Game {
         // Add the panel to a frame and display it
         JFrame frame = new JFrame();
         frame.add(panel);
-        frame.setSize(800, 800);  // Set the size of the frame
+        frame.setSize(750, 700);  // Set the size of the frame
         frame.setVisible(true);  // Make the frame visible
 
         world[player.getRow()][player.getColumn()] = Cell.PLAYER;
@@ -104,7 +106,7 @@ public class Game {
             output += "<br>";
         }
         output += "</html>";
-        return output.replaceAll("VOID", ".").replaceAll("PLAYER", "@");
+        return output.replaceAll("VOID", VOID).replaceAll("PLAYER", PLAYER);
     }
 
     public Integer[] findPlayer(Integer[][] world, Integer worldDimensionX, Integer worldDimensionY) {
