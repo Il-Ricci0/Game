@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.event.*;
+import java.awt.*;
 
 enum Cell {
     VOID,
@@ -8,8 +9,8 @@ enum Cell {
 }
 
 public class Game {
-    public static Integer worldDimensionX = 40;
-    public static Integer worldDimensionY = 30;
+    public static Integer worldDimensionX = 50;
+    public static Integer worldDimensionY = 50;
     public static Boolean end = false;
     public static Cell[][] world = generateEmptyWorld(worldDimensionX, worldDimensionY);
     // martrix[row][column]
@@ -18,13 +19,16 @@ public class Game {
     public static final String VOID = "___";
     public static final String PLAYER = "| O |";
 
-    public static final Integer WINDOWWIDTH = 750;
-    public static final Integer WINDOWHEIGTH = 700;
+    public static final Integer WINDOWWIDTH = 800;
+    public static final Integer WINDOWHEIGTH = 800;
 
     public static final Long DELAY = 1000L;
+    public static Integer tileSize = WINDOWWIDTH / worldDimensionY;
 
     public static void main(String[] args) throws Exception {
         JPanel panel = new JPanel();
+        panel.setPreferredSize(new Dimension(WINDOWWIDTH, WINDOWHEIGTH));
+        panel.setLayout(new GridLayout(worldDimensionX, worldDimensionY));
 
         // Add a key listener to the panel
         panel.addKeyListener(new KeyAdapter() {
@@ -74,22 +78,27 @@ public class Game {
             }
         });
 
-        JLabel label = new JLabel();
-
         // Make the panel focusable so it can receive key events
         panel.setFocusable(true);
         panel.requestFocusInWindow();
-        panel.add(label);
+
+        for (int i = 0; i < worldDimensionX; i++) {
+            for (int j = 0; j < worldDimensionY; j++) {
+                JPanel tile = new JPanel();
+                panel.add(tile);
+            }
+        }
 
         // Add the panel to a frame and display it
-        JFrame frame = new JFrame();
-        frame.add(panel);
-        frame.setSize(WINDOWWIDTH, WINDOWHEIGTH); // Set the size of the frame
-        frame.setVisible(true); // Make the frame visible
+        JFrame window = new JFrame();
+        window.setSize(WINDOWWIDTH, WINDOWHEIGTH);
+        window.add(panel);
+        window.setVisible(true); // Make the frame visible
+        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         world[player.getRow()][player.getColumn()] = Cell.PLAYER;
 
-        Thread worldRenderer = new Thread(new WorldRenderer(label, panel));
+        Thread worldRenderer = new Thread(new WorldRenderer(panel));
         worldRenderer.start();
     }
 
