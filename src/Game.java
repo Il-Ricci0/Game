@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.Date;
 
 enum Cell {
     VOID,
@@ -34,33 +33,41 @@ public class Game {
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_W:
                         if (player.getRow() - 1 >= 0) {
-                            world[player.getRow()][player.getColumn()] = Cell.VOID;
-                            player.setRow(player.getRow() - 1);
-                            world[player.getRow()][player.getColumn()] = Cell.PLAYER;
+                            if (player.getRow() - 1 >= 0) {
+                                world[player.getRow()][player.getColumn()] = Cell.VOID;
+                                player.setRow(player.getRow() - 1);
+                                world[player.getRow()][player.getColumn()] = Cell.PLAYER;
+                            }
                         }
                         break;
 
                     case KeyEvent.VK_A:
                         if (player.getColumn() - 1 >= 0) {
-                            world[player.getRow()][player.getColumn()] = Cell.VOID;
-                            player.setColumn(player.getColumn() - 1);
-                            world[player.getRow()][player.getColumn()] = Cell.PLAYER;
+                            if (player.getColumn() - 1 >= 0) {
+                                world[player.getRow()][player.getColumn()] = Cell.VOID;
+                                player.setColumn(player.getColumn() - 1);
+                                world[player.getRow()][player.getColumn()] = Cell.PLAYER;
+                            }
                         }
                         break;
 
                     case KeyEvent.VK_S:
                         if (player.getRow() + 1 < worldDimensionX) {
-                            world[player.getRow()][player.getColumn()] = Cell.VOID;
-                            player.setRow(player.getRow() + 1);
-                            world[player.getRow()][player.getColumn()] = Cell.PLAYER;
+                            if (player.getRow() + 1 < worldDimensionX) {
+                                world[player.getRow()][player.getColumn()] = Cell.VOID;
+                                player.setRow(player.getRow() + 1);
+                                world[player.getRow()][player.getColumn()] = Cell.PLAYER;
+                            }
                         }
                         break;
 
                     case KeyEvent.VK_D:
                         if (player.getColumn() + 1 < worldDimensionY) {
-                            world[player.getRow()][player.getColumn()] = Cell.VOID;
-                            player.setColumn(player.getColumn() + 1);
-                            world[player.getRow()][player.getColumn()] = Cell.PLAYER;
+                            if (player.getColumn() + 1 < worldDimensionY) {
+                                world[player.getRow()][player.getColumn()] = Cell.VOID;
+                                player.setColumn(player.getColumn() + 1);
+                                world[player.getRow()][player.getColumn()] = Cell.PLAYER;
+                            }
                         }
                         break;
                 }
