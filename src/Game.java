@@ -15,7 +15,7 @@ public class Game {
     public static Cell[][] world = generateEmptyWorld(worldDimensionX, worldDimensionY);
     // martrix[row][column]
 
-    public static Player player = new Player("Giocatore 1", 0, 0);
+    public static Player player = new Player("Giocatore 1", 3, 3);
 
     public static final Integer WINDOWWIDTH = 800;
     public static final Integer WINDOWHEIGTH = 800;
@@ -24,6 +24,18 @@ public class Game {
     public static Integer tileSize = WINDOWWIDTH / worldDimensionY;
 
     public static void main(String[] args) throws Exception {
+
+        //
+        for (int i = 0; i < worldDimensionX; i++) {
+            world[i][0] = Cell.WALL;
+            world[i][worldDimensionX - 1] = Cell.WALL;
+        }
+        for (int i = 0; i < worldDimensionY; i++) {
+            world[0][i] = Cell.WALL;
+            world[worldDimensionY - 1][i] = Cell.WALL;
+        }
+        //
+
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(WINDOWWIDTH, WINDOWHEIGTH));
         panel.setLayout(new GridLayout(worldDimensionX, worldDimensionY));
@@ -35,7 +47,7 @@ public class Game {
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_W, KeyEvent.VK_UP:
                         if (player.getRow() - 1 >= 0) {
-                            if (player.getRow() - 1 >= 0) {
+                            if (world[player.getRow()-1][player.getColumn()] != Cell.WALL) {
                                 world[player.getRow()][player.getColumn()] = Cell.VOID;
                                 player.setRow(player.getRow() - 1);
                                 world[player.getRow()][player.getColumn()] = Cell.PLAYER;
@@ -45,7 +57,7 @@ public class Game {
 
                     case KeyEvent.VK_A, KeyEvent.VK_LEFT:
                         if (player.getColumn() - 1 >= 0) {
-                            if (player.getColumn() - 1 >= 0) {
+                            if (world[player.getRow()][player.getColumn()-1] != Cell.WALL) {
                                 world[player.getRow()][player.getColumn()] = Cell.VOID;
                                 player.setColumn(player.getColumn() - 1);
                                 world[player.getRow()][player.getColumn()] = Cell.PLAYER;
@@ -55,7 +67,7 @@ public class Game {
 
                     case KeyEvent.VK_S, KeyEvent.VK_DOWN:
                         if (player.getRow() + 1 < worldDimensionX) {
-                            if (player.getRow() + 1 < worldDimensionX) {
+                            if (world[player.getRow()+1][player.getColumn()] != Cell.WALL) {
                                 world[player.getRow()][player.getColumn()] = Cell.VOID;
                                 player.setRow(player.getRow() + 1);
                                 world[player.getRow()][player.getColumn()] = Cell.PLAYER;
@@ -65,7 +77,7 @@ public class Game {
 
                     case KeyEvent.VK_D, KeyEvent.VK_RIGHT:
                         if (player.getColumn() + 1 < worldDimensionY) {
-                            if (player.getColumn() + 1 < worldDimensionY) {
+                            if (world[player.getRow()][player.getColumn()+1] != Cell.WALL) {
                                 world[player.getRow()][player.getColumn()] = Cell.VOID;
                                 player.setColumn(player.getColumn() + 1);
                                 world[player.getRow()][player.getColumn()] = Cell.PLAYER;
