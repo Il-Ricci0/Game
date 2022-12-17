@@ -16,8 +16,6 @@ public class Game {
     // martrix[row][column]
 
     public static Player player = new Player("Giocatore 1", 0, 0);
-    public static final String VOID = "___";
-    public static final String PLAYER = "| O |";
 
     public static final Integer WINDOWWIDTH = 800;
     public static final Integer WINDOWHEIGTH = 800;
@@ -35,7 +33,7 @@ public class Game {
             @Override
             public void keyPressed(KeyEvent e) {
                 switch (e.getKeyCode()) {
-                    case KeyEvent.VK_W:
+                    case KeyEvent.VK_W, KeyEvent.VK_UP:
                         if (player.getRow() - 1 >= 0) {
                             if (player.getRow() - 1 >= 0) {
                                 world[player.getRow()][player.getColumn()] = Cell.VOID;
@@ -45,7 +43,7 @@ public class Game {
                         }
                         break;
 
-                    case KeyEvent.VK_A:
+                    case KeyEvent.VK_A, KeyEvent.VK_LEFT:
                         if (player.getColumn() - 1 >= 0) {
                             if (player.getColumn() - 1 >= 0) {
                                 world[player.getRow()][player.getColumn()] = Cell.VOID;
@@ -55,7 +53,7 @@ public class Game {
                         }
                         break;
 
-                    case KeyEvent.VK_S:
+                    case KeyEvent.VK_S, KeyEvent.VK_DOWN:
                         if (player.getRow() + 1 < worldDimensionX) {
                             if (player.getRow() + 1 < worldDimensionX) {
                                 world[player.getRow()][player.getColumn()] = Cell.VOID;
@@ -65,7 +63,7 @@ public class Game {
                         }
                         break;
 
-                    case KeyEvent.VK_D:
+                    case KeyEvent.VK_D, KeyEvent.VK_RIGHT:
                         if (player.getColumn() + 1 < worldDimensionY) {
                             if (player.getColumn() + 1 < worldDimensionY) {
                                 world[player.getRow()][player.getColumn()] = Cell.VOID;
