@@ -21,8 +21,11 @@ public class Game {
         WorldMaker worldMaker = new WorldMaker("src/maps/map.txt");
         Cell[][] world = worldMaker.readfile();
 
+System.out.println("A "+world.length + " " + world.length);
+System.out.println(world[48][0] + " " + world[48][47]);
+
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(world[0].length, world[1].length));
+        panel.setLayout(new GridLayout(world.length, world[0].length));
 
         // Add a key listener to the panel
         panel.addKeyListener(new KeyAdapter() {
@@ -50,7 +53,7 @@ public class Game {
                         break;
 
                     case KeyEvent.VK_S, KeyEvent.VK_DOWN:
-                        if (player.getRow() + 1 < world[1].length) {
+                        if (player.getRow() + 1 < world.length) {
                             if (world[player.getRow() + 1][player.getColumn()] != Cell.WALL) {
                                 world[player.getRow()][player.getColumn()] = Cell.VOID;
                                 player.setRow(player.getRow() + 1);
@@ -76,8 +79,8 @@ public class Game {
         panel.setFocusable(true);
         panel.requestFocusInWindow();
 
-        for (int i = 0; i < world[1].length; i++) {
-            for (int j = 0; j < world[0].length; j++) {
+        for (int i = 0; i < world[0].length; i++) {
+            for (int j = 0; j < world.length; j++) {
                 JPanel tile = new JPanel();
                 panel.add(tile);
             }

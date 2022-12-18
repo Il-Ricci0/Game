@@ -13,8 +13,8 @@ class WorldRenderer implements Runnable {
 
     public void renderWorld() {
         java.util.List<Cell> listifiedWorldPrerenderedMatrix = new ArrayList<Cell>();
-        for (int i = 0; i < world[0].length; i++) {
-            for (int j = 0; j < world[1].length; j++) {
+        for (int i = 0; i < world.length; i++) {
+            for (int j = 0; j < world[0].length; j++) {
                 listifiedWorldPrerenderedMatrix.add(world[i][j]);
             }
         }
