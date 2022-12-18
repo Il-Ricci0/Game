@@ -17,7 +17,6 @@ public class WorldMaker {
             List<String> lines = new ArrayList<String>();
             while (scanner.hasNextLine()) {
                 lines.add(scanner.nextLine());
-                System.out.println(lines.get(lines.size()-1));
             }
             Integer currentRow = 0;
             world = new Cell[lines.size()][lines.get(0).length()];
@@ -28,7 +27,6 @@ public class WorldMaker {
                     System.exit(1);
                 }
             }
-            System.out.println("B " +lines.size() +" "+ lines.get(0).length());
             for (int i = 0; i < lines.size(); i++) {
                 for (int j = 0; j < lines.get(0).length(); j++) {
                     switch (lines.get(i).charAt(j)) {

@@ -9,8 +9,7 @@ enum Cell {
 }
 
 public class Game {
-    public static final Integer WINDOWWIDTH = 800;
-    public static final Integer WINDOWHEIGTH = 800;
+    
 
     // martrix[row][column]
 
@@ -21,8 +20,8 @@ public class Game {
         WorldMaker worldMaker = new WorldMaker("src/maps/map.txt");
         Cell[][] world = worldMaker.readfile();
 
-System.out.println("A "+world.length + " " + world.length);
-System.out.println(world[48][0] + " " + world[48][47]);
+        Integer windowHeigth = 800;
+        Integer windowWidth = windowHeigth*world[0].length/world.length;
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(world.length, world[0].length));
@@ -88,7 +87,7 @@ System.out.println(world[48][0] + " " + world[48][47]);
 
         // Add the panel to a frame and display it
         JFrame window = new JFrame();
-        window.setSize(WINDOWWIDTH, WINDOWHEIGTH);
+        window.setSize(windowWidth, windowHeigth);
         window.add(panel);
         window.setVisible(true); // Make the frame visible
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
