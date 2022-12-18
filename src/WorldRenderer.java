@@ -4,16 +4,18 @@ import java.util.ArrayList;
 
 class WorldRenderer implements Runnable {
     private JPanel panel;
+    private Cell[][] world;
 
-    public WorldRenderer(JPanel panel) {
+    public WorldRenderer(JPanel panel, Cell[][] world) {
         this.panel = panel;
+        this.world = world;
     }
 
     public void renderWorld() {
         java.util.List<Cell> listifiedWorldPrerenderedMatrix = new ArrayList<Cell>();
-        for (int i = 0; i < Game.worldDimensionX; i++) {
-            for (int j = 0; j < Game.worldDimensionY; j++) {
-                listifiedWorldPrerenderedMatrix.add(Game.world[i][j]);
+        for (int i = 0; i < world[0].length; i++) {
+            for (int j = 0; j < world[1].length; j++) {
+                listifiedWorldPrerenderedMatrix.add(world[i][j]);
             }
         }
         Component[] panelComponents = panel.getComponents();
